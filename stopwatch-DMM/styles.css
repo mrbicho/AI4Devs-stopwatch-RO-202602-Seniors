@@ -178,13 +178,14 @@ body {
   border-radius: 4px;
   padding: 20px 24px 16px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   gap: 6px;
   position: relative;
   overflow: hidden;
   transition: box-shadow 0.3s, border-color 0.3s;
   min-height: 110px;
+  container-type: inline-size;
 }
 
 .display::after {
@@ -197,7 +198,8 @@ body {
 
 .time-main {
   font-family: var(--font-display);
-  font-size: clamp(3.5rem, 12vw, 5.5rem);
+  font-size: clamp(1.8rem, 13cqw, 3.8rem);
+  white-space: nowrap;
   color: var(--text-primary);
   letter-spacing: 0.05em;
   line-height: 1;
@@ -207,10 +209,12 @@ body {
 
 .time-ms {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  font-size: clamp(0.9rem, 4cqw, 1.5rem);
+  white-space: nowrap;
   color: var(--text-secondary);
   letter-spacing: 0.05em;
-  margin-bottom: 4px;
+  align-self: flex-end;
+  padding-bottom: 0.15em;
   transition: color 0.3s;
   user-select: none;
 }
@@ -493,9 +497,6 @@ body {
   .app-wrapper { padding: 16px 14px 32px; }
   .panel       { padding: 20px 16px 24px; }
 
-  .time-main   { font-size: clamp(3rem, 14vw, 4.5rem); }
-  .time-ms     { font-size: 1rem; }
-
   .setter-input  { width: 56px; font-size: 1.3rem; padding: 8px 4px; }
   .setter-sep    { font-size: 1.5rem; }
 
@@ -504,5 +505,5 @@ body {
 }
 
 @media (max-width: 360px) {
-  .time-main { font-size: 2.6rem; }
+  .display { padding: 16px 16px 12px; }
 }

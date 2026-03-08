@@ -49,3 +49,17 @@ Claude:
   - styles.css — all styling
   - script.js — all logic
 
+
+### Prompt 2
+
+The time display text is too large and gets cropped on both sides,                                                                                                             
+  especially in fullscreen. Please adjust the CSS so the time always                                                                                                             
+  fits within its container with comfortable padding on each side.                                                                                                               
+                                                                                                                                                                                 
+  Requirements:                                                                                                                                                                  
+  - Add horizontal padding inside the display box so the text never                                                                                                              
+    touches or overflows the edges
+  - The font size should scale down if needed to always fit within                                                                                                               
+    the display area (use fluid typography or clamp())
+  - The fix must work on all screen sizes, including fullscreen
+  - Do not change the layout or design, only fix the text overflow issue
