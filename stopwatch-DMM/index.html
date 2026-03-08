@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHRONOS — Timer & Stopwatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="noise"></div>
+  <div class="scanlines"></div>
+
+  <div class="app-wrapper">
+
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">⏱</span>
+        <span class="logo-text">CHRONOS</span>
+      </div>
+      <div class="header-line"></div>
+    </header>
+
+    <!-- Mode Toggle -->
+    <div class="mode-toggle">
+      <button class="mode-btn active" id="btn-stopwatch" onclick="switchMode('stopwatch')">
+        <span class="mode-icon">▶</span> STOPWATCH
+      </button>
+      <button class="mode-btn" id="btn-countdown" onclick="switchMode('countdown')">
+        <span class="mode-icon">▼</span> COUNTDOWN
+      </button>
+    </div>
+
+    <!-- ═══════════════════ STOPWATCH PANEL ═══════════════════ -->
+    <div class="panel" id="panel-stopwatch">
+
+      <div class="display-shell">
+        <div class="display-label">ELAPSED TIME</div>
+        <div class="display" id="sw-display">
+          <span class="time-main" id="sw-main">00:00:00</span>
+          <span class="time-ms" id="sw-ms">000</span>
+        </div>
+        <div class="display-status">
+          <span class="status-dot" id="sw-dot"></span>
+          <span class="status-text" id="sw-status">READY</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="sw-startbtn" onclick="swToggle()">
+          <span class="btn-label">START</span>
+        </button>
+        <button class="btn btn-clear" onclick="swClear()">
+          <span class="btn-label">CLEAR</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ═══════════════════ COUNTDOWN PANEL ═══════════════════ -->
+    <div class="panel hidden" id="panel-countdown">
+
+      <div class="display-shell">
+        <div class="display-label">REMAINING TIME</div>
+        <div class="display" id="cd-display">
+          <span class="time-main" id="cd-main">00:08:00</span>
+          <span class="time-ms" id="cd-ms">000</span>
+        </div>
+        <div class="display-status">
+          <span class="status-dot" id="cd-dot"></span>
+          <span class="status-text" id="cd-status">SET TIME</span>
+        </div>
+      </div>
+
+      <div class="time-setter" id="cd-setter">
+        <div class="setter-group">
+          <label class="setter-label">HH</label>
+          <input class="setter-input" id="cd-hours" type="number" min="0" max="99" value="0" placeholder="00">
+        </div>
+        <div class="setter-sep">:</div>
+        <div class="setter-group">
+          <label class="setter-label">MM</label>
+          <input class="setter-input" id="cd-minutes" type="number" min="0" max="59" value="8" placeholder="00">
+        </div>
+        <div class="setter-sep">:</div>
+        <div class="setter-group">
+          <label class="setter-label">SS</label>
+          <input class="setter-input" id="cd-seconds" type="number" min="0" max="59" value="0" placeholder="00">
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn btn-start" id="cd-startbtn" onclick="cdToggle()">
+          <span class="btn-label">START</span>
+        </button>
+        <button class="btn btn-clear" onclick="cdReset()">
+          <span class="btn-label">RESET</span>
+        </button>
+      </div>
+
+      <!-- Alert overlay -->
+      <div class="alert-overlay hidden" id="cd-alert">
+        <div class="alert-box">
+          <div class="alert-icon">⚡</div>
+          <div class="alert-text">TIME'S UP!</div>
+          <button class="btn btn-dismiss" onclick="cdDismiss()">DISMISS</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
