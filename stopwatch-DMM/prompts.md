@@ -2,7 +2,7 @@
 
 ## Chatbot used
 
-Claude: 
+Claude
 
 ## Prompts used
 
@@ -63,3 +63,30 @@ The time display text is too large and gets cropped on both sides,
     the display area (use fluid typography or clamp())
   - The fix must work on all screen sizes, including fullscreen
   - Do not change the layout or design, only fix the text overflow issue
+
+
+### Prompt 3
+
+The countdown timer has two bugs to fix:
+
+1. **Pause/Resume is broken**:
+  
+     When the user pauses the countdown and
+     clicks Start again, it restarts from the original input value instead
+     of resuming from where it was paused. Fix the cdStart() function so
+     that it resumes from the remaining time when paused, not from the input fields.
+
+2. **Wrong button label after pause**:
+
+     When the countdown is paused, the Start button resets to "START"
+     instead of "RESUME", which is misleading.
+     After pausing, the button label should show "RESUME"
+     to indicate it will continue from where it stopped. It should only
+     show "START" when the countdown has not been started yet or has
+     been fully reset. Also, the reset button is failing in the countdown.
+     It doesn't come back to the initial time selected.
+
+  Do not change anything else — layout, design, and other functionality
+  must remain exactly as they are.
+
+ 

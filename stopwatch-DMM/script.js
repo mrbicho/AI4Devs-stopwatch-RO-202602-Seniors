@@ -78,12 +78,13 @@ function swTick(now) {
 // ═══════════════════════════════════════════════════════
 //  COUNTDOWN
 // ═══════════════════════════════════════════════════════
-let cdRunning    = false;
-let cdStartTime  = 0;
-let cdRemaining  = 0;   // ms
-let cdSetTotal   = 0;   // ms  (last configured amount)
-let cdRafId      = null;
-let beepPlayed   = false;
+let cdRunning     = false;
+let cdStartTime   = 0;
+let cdRemaining   = 0;   // ms — time left at last pause/start
+let cdSetTotal    = 0;   // ms — anchors tick math each run segment
+let cdResetTarget = 0;   // ms — original configured duration, for Reset
+let cdRafId       = null;
+let beepPlayed    = false;
 
 const cdMainEl    = document.getElementById('cd-main');
 const cdMsEl      = document.getElementById('cd-ms');
@@ -125,10 +126,12 @@ function cdToggle() {
 }
 
 function cdStart() {
-  const totalMs = cdRunning ? cdRemaining : cdGetInputMs();
+  const resuming = cdRemaining > 0;
+  const totalMs  = resuming ? cdRemaining : cdGetInputMs();
   if (totalMs <= 0) return;
 
-  cdSetTotal   = cdGetInputMs();
+  if (!resuming) cdResetTarget = totalMs;  // only record original duration on a fresh start
+  cdSetTotal   = totalMs;   // anchor tick math to current remaining for this run segment
   cdRemaining  = totalMs;
   cdRunning    = true;
   cdStartTime  = performance.now();
@@ -149,7 +152,7 @@ function cdStop() {
   cancelAnimationFrame(cdRafId);
 
   cdStartBtn.classList.remove('stop-mode');
-  cdStartBtn.querySelector('.btn-label').textContent = 'START';
+  cdStartBtn.querySelector('.btn-label').textContent = cdRemaining > 0 ? 'RESUME' : 'START';
   cdSetInputsDisabled(false);
 
   cdDisplayEl.classList.remove('running', 'countdown-warn', 'done');
@@ -159,11 +162,12 @@ function cdStop() {
 }
 
 function cdReset() {
+  cdRemaining = 0;          // clear so cdStop shows START label
   cdStop();
   cdAlertEl.classList.add('hidden');
   cdDisplayEl.classList.remove('done');
-  cdRemaining = cdSetTotal;
-  swRenderTime(cdSetTotal || cdGetInputMs(), cdMainEl, cdMsEl);
+  cdRemaining = cdResetTarget;
+  swRenderTime(cdResetTarget || cdGetInputMs(), cdMainEl, cdMsEl);
   cdStatusEl.textContent = 'SET TIME';
 }
 
